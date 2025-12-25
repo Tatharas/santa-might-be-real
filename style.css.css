@@ -1,0 +1,202 @@
+/* --- CUSTOMIZATION GUIDE --- */
+/* FONT: Change the 'Georgia, serif' to a festive or elegant font you like! */
+/* COLORS: Adjust the variables below to change the entire site's color scheme. */
+:root {
+    --primary-red: #B51227; /* Deep Christmas Red */
+    --gold-accent: #DAA520; /* Elegant Gold */
+    --background-white: #FFFFFF;
+    --text-color: #333333;
+}
+
+body {
+    font-family: 'Georgia', serif; /* Change to a font you like */
+    margin: 0;
+    padding: 0;
+    background-color: #F8F8F8; /* Light background */
+    color: var(--text-color);
+    line-height: 1.6;
+    text-align: center;
+}
+
+/* VALORANT Subtle Accent - Use a color like Astra's blue/purple or a Radiant gold */
+.valo-accent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 10px;
+    background-color: #FF4655; /* Valorant Red */
+    z-index: 10;
+}
+
+.header {
+    background-color: var(--primary-red);
+    color: var(--background-white);
+    padding: 40px 20px;
+    margin-top: 10px; /* Space for the valo-accent */
+    border-bottom: 5px solid var(--gold-accent);
+}
+
+.header h1 {
+    font-size: 2.5em;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    color: #FFD700; /* Lighter gold for subtitle */
+    font-style: italic;
+}
+
+.container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.love-message, .swift-valorant, .closing-note {
+    background-color: var(--background-white);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+    text-align: left; /* Allow text to flow around images */
+}
+
+h2 {
+    color: var(--primary-red);
+    border-bottom: 2px solid var(--gold-accent);
+    display: inline-block;
+    padding-bottom: 5px;
+    margin-top: 0;
+}
+
+.tulip-note {
+    font-size: 1.1em;
+    font-style: italic;
+    color: var(--primary-red);
+    margin-top: 20px;
+}
+
+/* Taylor Swift & Valorant Section */
+.swift-valorant {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start; /* Align contents to the top */
+    text-align: center;
+    background-color: #FFFACD; /* Light, soft yellow */
+    border: 1px dashed var(--gold-accent);
+    padding: 30px 10px;
+}
+
+.swift-quote, .valo-reference {
+    width: 45%;
+    /* Override left alignment for content sections */
+    text-align: center; 
+}
+
+.valo-reference h3 {
+    color: #FF4655; /* Valorant Red */
+}
+
+.swift-quote h3 {
+    color: #B22222; /* A shade of red for Taylor */
+}
+
+.signature {
+    font-family: 'Brush Script MT', cursive; /* Use a handwriting-style font */
+    font-size: 1.8em;
+    color: var(--primary-red);
+    margin-top: 15px;
+    text-align: center;
+}
+
+/* NEW: Image Floating Styles */
+.message-photo {
+    width: 120px; /* Set a consistent size for embedded photos */
+    height: 120px;
+    object-fit: cover;
+    border-radius: 5px;
+    border: 3px solid var(--gold-accent);
+    margin: 5px 10px; /* Space around image */
+}
+
+.message-photo.left {
+    float: left;
+    margin-right: 15px;
+}
+
+.message-photo.right {
+    float: right;
+    margin-left: 15px;
+}
+
+.message-photo.center {
+    display: block;
+    float: none;
+    margin: 20px auto 0;
+}
+
+/* NEW: Styling for The One section */
+.the-one-message {
+    background-color: #F0F8FF; /* Light blue/white background for focus */
+    padding: 35px;
+    border-radius: 12px;
+    margin-bottom: 40px;
+    border: 2px solid var(--primary-red);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+    text-align: left; /* Keep this section's text flow left */
+}
+
+.the-one-message h3 {
+    font-size: 1.8em;
+    color: var(--gold-accent);
+    margin-bottom: 15px;
+    border: none;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.the-one-message p {
+    font-size: 1.2em;
+    font-weight: 500;
+    /* Important for clearing floats */
+    overflow: auto; 
+}
+
+/* Styles for the Music Play Button (Autoplay Fix) - UNCHANGED */
+#play-music-btn {
+    padding: 10px 20px;
+    font-size: 1.2em;
+    background-color: var(--primary-red);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.2s;
+}
+
+#play-music-btn:hover {
+    background-color: #A01020;
+}
+
+/* Media Query for smaller screens */
+@media (max-width: 600px) {
+    .header h1 {
+        font-size: 2em;
+    }
+    .swift-valorant {
+        flex-direction: column;
+    }
+    .swift-quote, .valo-reference {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    /* Mobile: Stop images from floating to keep text readable */
+    .message-photo.left, 
+    .message-photo.right {
+        float: none;
+        display: block;
+        margin: 10px auto;
+    }
+}
