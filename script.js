@@ -1,53 +1,78 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // --- Signature Hover Effect ---
+
+    /* =========================
+       SIGNATURE HOVER EFFECT
+       ========================= */
     const signature = document.querySelector('.signature');
+
     if (signature) {
         signature.addEventListener('mouseover', () => {
-            signature.style.color = '#000000'; // Change to black or gold on hover
-            signature.style.textShadow = '1px 1px 2px var(--gold-accent)';
+            signature.style.color = '#8b6f7a'; // soft rose tone
+            signature.style.textShadow = '0 2px 6px rgba(216, 140, 154, 0.6)';
         });
+
         signature.addEventListener('mouseout', () => {
-            signature.style.color = 'var(--primary-red)';
+            signature.style.color = 'var(--tulip-pink)';
             signature.style.textShadow = 'none';
         });
     }
 
-    // --- Audio Autoplay Fix for "It's Nice to Have a Friend" ---
+    /* =========================
+       AUDIO AUTOPLAY HANDLING
+       ========================= */
     const audio = document.getElementById('background-music');
-    
-    // Attempt to play the audio
-    const playPromise = audio.play();
 
-    if (playPromise !== undefined) {
-        playPromise.then(() => {
-            // Autoplay was successful (unmuted or browser allowed it)
-        }).catch(error => {
-            // Autoplay was prevented by the browser. Show a button to start it.
+    if (!audio) return; // safety check
+
+    const tryPlay = audio.play();
+
+    if (tryPlay !== undefined) {
+        tryPlay.catch(() => {
+
+            // Overlay container
             const musicStarter = document.createElement('div');
-            
-            // Create the wrapper for the button
             musicStarter.style.cssText = `
-                position: fixed; 
-                top: 0; 
-                left: 0; 
-                width: 100%; 
-                height: 100%; 
-                display: flex; 
-                justify-content: center; 
-                align-items: center; 
-                background: rgba(0,0,0,0.8); /* Semi-transparent overlay */
+                position: fixed;
+                inset: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background: rgba(255, 250, 247, 0.95);
+                backdrop-filter: blur(6px);
                 z-index: 9999;
             `;
-            
-            // Create the button element
-            musicStarter.innerHTML = '<button id="play-music-btn">Click to Start Music</button>';
-            document.body.appendChild(musicStarter);
 
-            // Add listener to the button
-            document.getElementById('play-music-btn').addEventListener('click', () => {
-                audio.play();
-                musicStarter.remove(); // Remove the overlay once music starts
+            // Button
+            const button = document.createElement('button');
+            button.id = 'play-music-btn';
+            button.textContent = '🌷 Tap to play our song';
+
+            button.style.cssText = `
+                padding: 14px 28px;
+                font-size: 1.2em;
+                font-family: Georgia, serif;
+                background: linear-gradient(to right, #f3b5c1, #d88c9a);
+                color: white;
+                border: none;
+                border-radius: 30px;
+                cursor: pointer;
+                box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+                transition: transform 0.2s ease, box-shadow 0.2s ease;
+            `;
+
+            button.addEventListener('mouseover', () => {
+                button.style.transform = 'scale(1.05)';
+                button.style.boxShadow = '0 12px 28px rgba(0,0,0,0.25)';
             });
-        });
-    }
-});
+
+            button.addEventListener('mouseout', () => {
+                button.style.transform = 'scale(1)';
+                button.style.boxShadow = '0 8px 20px rgba(0,0,0,0.2)';
+            });
+
+            button.addEventListener('click', () => {
+                audio.play();
+                musicStarter.remove();
+            });
+
+            musicStarter.appendChild(button);
