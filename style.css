@@ -162,6 +162,12 @@ h2 {
     /* Important for clearing floats */
     overflow: auto; 
 }
+.the-one-message p,
+.love-message p,
+.body-text {
+    clear: both;
+}
+
 
 /* Styles for the Music Play Button (Autoplay Fix) - UNCHANGED */
 #play-music-btn {
@@ -200,3 +206,4 @@ h2 {
         margin: 10px auto;
     }
 }
+
