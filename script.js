@@ -1,42 +1,38 @@
 document.addEventListener('DOMContentLoaded', () => {
-
-    /* =========================
-       SIGNATURE HOVER EFFECT
-       ========================= */
-    const signature = document.querySelector('.signature');
-
-    if (signature) {
-        signature.addEventListener('mouseover', () => {
-            signature.style.color = '#8b6f7a'; // soft rose tone
-            signature.style.textShadow = '0 2px 6px rgba(216, 140, 154, 0.6)';
-        });
-
-        signature.addEventListener('mouseout', () => {
-            signature.style.color = 'var(--tulip-pink)';
-            signature.style.textShadow = 'none';
-        });
-    }
-
-    /* =========================
-       MUSIC START ON FIRST CLICK
-       ========================= */
     const audio = document.getElementById('background-music');
     if (!audio) return;
 
-    let started = false;
+    audio.play().catch(() => {
+        const overlay = document.createElement('div');
+        overlay.style.cssText = `
+            position: fixed;
+            inset: 0;
+            background: rgba(255,250,247,0.95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        `;
 
-    const startMusic = () => {
-        if (started) return;
+        const btn = document.createElement('button');
+        btn.textContent = '🌷 Tap to play our song';
+        btn.style.cssText = `
+            padding: 14px 28px;
+            font-size: 1.2em;
+            background: linear-gradient(#f3b5c1, #d88c9a);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+        `;
 
-        audio.play()
-            .then(() => {
-                started = true;
-                document.removeEventListener('click', startMusic);
-            })
-            .catch(() => {
-                // If browser blocks it once, next click will retry
-            });
-    };
+        btn.onclick = () => {
+            audio.play();
+            overlay.remove();
+        };
 
-    document.addEventListener('click', startMusic);
+        overlay.appendChild(btn);
+        document.body.appendChild(overlay);
+    });
 });
+
